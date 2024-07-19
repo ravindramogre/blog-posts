@@ -1,0 +1,15 @@
+.post-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .site-page-header {
+    margin-bottom: 16px;
+    font-size: small;
+  }
+  
+  .post-detail-content {
+    margin-top: 20px;
+  }
+  
