@@ -2,12 +2,19 @@ import { List, Table, Button, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-const API_URL = "https://newsapi.org/v2/everything?q=tesla&from=2024-06-18&sortBy=publishedAt&apiKey=bbed78df30a24e61a901b2924a4032c3";
 const BlogPostList = () => {
   const [data, setData] = useState([]);
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  let currentDate = new Date();
+  let previousDate = new Date(currentDate.getTime() - 86400000);
+  let year = previousDate.getFullYear();
+  let month = ('0' + (previousDate.getMonth() + 1)).slice(-2);
+  let day = ('0' + previousDate.getDate()).slice(-2);
+  let formattedPreviousDate = `${year}-${month}-${day}`;
+  const API_URL =
+    `https://newsapi.org/v2/everything?q=tesla&from=${formattedPreviousDate}&sortBy=publishedAt&apiKey=bbed78df30a24e61a901b2924a4032c3`;
   useEffect(() => {
     const paginatedURL = `&page=${current}&pageSize=${pageSize}`;
     fetch(API_URL + paginatedURL)

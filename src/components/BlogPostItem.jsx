@@ -4,12 +4,19 @@ import { Link, useParams } from "react-router-dom";
 import { Typography, Breadcrumb, Descriptions, Card, Spin} from "antd";
 const { Title } = Typography;
 
-const API_URL =
-  "https://newsapi.org/v2/everything?q=tesla&from=2024-06-18&sortBy=publishedAt&apiKey=bbed78df30a24e61a901b2924a4032c3";
-
 const BlogPostItem = () => {
   const { page, index, pagesize } = useParams();
   const [record, setRecord] = useState(null);
+
+  let currentDate = new Date();
+  let previousDate = new Date(currentDate.getTime() - 86400000);
+  let year = previousDate.getFullYear();
+  let month = ('0' + (previousDate.getMonth() + 1)).slice(-2);
+  let day = ('0' + previousDate.getDate()).slice(-2);
+  let formattedPreviousDate = `${year}-${month}-${day}`;
+  const API_URL =
+    `https://newsapi.org/v2/everything?q=tesla&from=${formattedPreviousDate}&sortBy=publishedAt&apiKey=bbed78df30a24e61a901b2924a4032c3`;
+
   useEffect(() => {
     const paginatedURL = `&page=${page}&pageSize=${pagesize}`;
     fetch(API_URL + paginatedURL)
