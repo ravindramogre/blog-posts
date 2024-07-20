@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path="blog-posts/">
             <Route index element={<BlogPostList />}></Route>
             <Route path="post/:page/:pagesize/:index" element={<BlogPostItem />} />
             <Route path="*" element={<NoPage />} />
